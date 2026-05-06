@@ -1039,6 +1039,10 @@ function showMotor(m){
   if(compareMotor && compareMotor.tag === m.tag && compareMotor.source === m.source){
     compareMotor = null; compareIdx = null;
   }
+
+  // Build the data series FIRST — this was missing, causing vals to be undefined
+  const {dates, vals} = buildSeries(m);
+
   const rated  = m.rated_current || null;
   const oc1    = rated ? +(rated*1.1).toFixed(3) : null;
   const oc2    = rated ? +(rated*1.2).toFixed(3) : null;
